@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:background="@drawable/dialog_bg"
+    android:elevation="8dp"
+    android:orientation="vertical"
+
+    >
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_marginEnd="8dp"
+            android:id="@+id/note_row_clicked_image"
+            android:src="@color/colorBlue"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <EditText
+            android:id="@+id/note_row_clicked_title"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Title Comes Here..."
+            android:textStyle="bold"
+            android:textColor="@color/colorBlue"
+            android:textColorHint="@color/colorBlue"
+            android:textSize="16sp"
+            android:background="@color/colorTransparent"
+            android:padding="4dp"
+            />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:src="@color/colorBlue"
+        android:layout_marginBottom="8dp"
+        />
+
+    <ScrollView
+        android:layout_gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        >
+        <EditText
+            android:id="@+id/note_row_clicked_describe"
+            android:background="@color/colorTransparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorGray"
+            android:textColorHint="@color/colorGray"
+            android:hint="@string/loremipsum"
+            android:textSize="14sp"
+            android:padding="8dp"
+            android:gravity="top|left"
+
+            />
+    </ScrollView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:src="@color/colorBlue"
+        android:padding="0dp"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/noteActionLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/notes_bar_edit_on_clicked_btnImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Image"
+            android:textSize="16sp"
+            android:padding="4dp"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:tint="@color/colorbtnfeed"
+            android:textColor="@color/colorBlue"
+            android:textStyle="bold"
+            />
+
+        <ImageView
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:src="@color/colorBlue"
+            android:padding="0dp"
+            />
+
+        <TextView
+            android:id="@+id/notes_bar_edit_on_clicked_btnSave"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:padding="4dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:tint="@color/colorbtnfeed"
+            android:textColor="@color/colorBlue"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

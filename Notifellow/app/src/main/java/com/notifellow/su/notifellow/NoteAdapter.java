@@ -42,13 +42,16 @@ public class NoteAdapter extends ArrayAdapter<Note> {
 
     private void rowOnClick(Note note) {
         noteInfoDialog = new Dialog(getContext());
-        noteInfoDialog.setContentView(R.layout.note_row_clicked);
-//        noteInfoDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); // DO NOT TOUCH, DESIGN ISSUES
+        noteInfoDialog.setContentView(R.layout.note_row_clicked_v2);
+        noteInfoDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); // DO NOT TOUCH, DESIGN ISSUES
+        int width = (int)(getContext().getResources().getDisplayMetrics().widthPixels); // fills the screen in terms of width
+        int height = (int)(getContext().getResources().getDisplayMetrics().heightPixels*0.90); //fills the 90% of screen in terms of height
+        noteInfoDialog.getWindow().setLayout(width, height); // set the layout width and height
         tv_tittle = noteInfoDialog.findViewById(R.id.note_row_clicked_title);
         tv_note = noteInfoDialog.findViewById(R.id.note_row_clicked_describe);
         imageView = noteInfoDialog.findViewById(R.id.note_row_clicked_image);
-        Button btnImage = noteInfoDialog.findViewById(R.id.notes_bar_edit_on_clicked_btnImage);
-        Button btnSave = noteInfoDialog.findViewById(R.id.notes_bar_edit_on_clicked_btnSave);
+        TextView btnImage = noteInfoDialog.findViewById(R.id.notes_bar_edit_on_clicked_btnImage);
+        TextView btnSave = noteInfoDialog.findViewById(R.id.notes_bar_edit_on_clicked_btnSave);
         id = note.getId();
 
         btnImage.setOnClickListener(new View.OnClickListener() {

@@ -56,9 +56,10 @@ public class UsersAdapter extends BaseAdapter {
     public class ViewHolder //ViewHolder for userList
     {
         TextView name_surnameTv, usernameTv, statusUSR;
-        Button addUSRBtn;
+        TextView addUSRBtn;
         ImageView profilepicIv;
         ImageView addAsFriend;
+        ImageView line;
     }
 
 
@@ -84,7 +85,7 @@ public class UsersAdapter extends BaseAdapter {
         final ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = inflater.inflate(R.layout.row_users, null);
+            view = inflater.inflate(R.layout.row_users_v2, null);
 
             //initialize view
             holder.name_surnameTv = view.findViewById(R.id.userNameSurname);
@@ -92,6 +93,7 @@ public class UsersAdapter extends BaseAdapter {
             holder.profilepicIv = view.findViewById(R.id.userPic);
             holder.statusUSR = view.findViewById(R.id.statusUser);
             holder.addUSRBtn = view.findViewById(R.id.userAddBTN);
+            holder.line = view.findViewById(R.id.lineUser);
             //holder.addAsFriend = view.findViewById(R.id.addUserAsFriend); //Deleted for now
             view.setTag(holder);
 
@@ -100,7 +102,8 @@ public class UsersAdapter extends BaseAdapter {
         }
 
         if (!userList.get(position).getStatus().equals("You Can Add This User As A Friend."))
-            holder.addUSRBtn.setVisibility(View.INVISIBLE);
+            holder.addUSRBtn.setVisibility(View.GONE);
+            holder.line.setVisibility(View.GONE);
 
         // Setting the results into views.
         holder.name_surnameTv.setText(userList.get(position).getNameSurname());
@@ -109,12 +112,14 @@ public class UsersAdapter extends BaseAdapter {
         holder.profilepicIv.setImageURI(userList.get(position).getProfilePic());// used setImageResource but there are options,
         // setImageBitmap may be suitable for database i guess.
         if (userList.get(position).getStatus().equals("You Can Add This User As A Friend.") ) {
+            holder.line.setVisibility(View.VISIBLE);
             holder.addUSRBtn.setVisibility(View.VISIBLE);
-            holder.addUSRBtn.setText("+");
+            holder.addUSRBtn.setText("Add as Friend");
         }
         else if (userList.get(position).getStatus().equals("Friend Request Sent!") ) {
+            holder.line.setVisibility(View.VISIBLE);
             holder.addUSRBtn.setVisibility(View.VISIBLE);
-            holder.addUSRBtn.setText("-");
+            holder.addUSRBtn.setText("Cancel Friend Request");
         }
         final String user_info = (String) holder.name_surnameTv.getText();
 
@@ -131,9 +136,9 @@ public class UsersAdapter extends BaseAdapter {
         holder.addUSRBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                final Button button = (Button) view;
+                final TextView button = (TextView) view;
                 final String email = shared.getString("email", null);
-                if (button.getText().toString().equals("+"))
+                if (button.getText().toString().equals("Add as Friend"))
                 {
                     StringRequest postRequest = new StringRequest(Request.Method.POST, "http://188.166.149.168:3030/addFR",
                             new Response.Listener<String>() {
@@ -142,7 +147,7 @@ public class UsersAdapter extends BaseAdapter {
 
                                     holder.statusUSR.setText("Friend Request Sent!");
                                     userList.get(position).setStatus("Friend Request Sent!");
-                                    button.setText("-");
+                                    button.setText("Cancel Friend Request");
                                     Snackbar snackbar = Snackbar
                                             .make(activity.findViewById(android.R.id.content), "You have sent friend request to " + userList.get(position).getNameSurname() + ".", Snackbar.LENGTH_LONG);
                                     snackbar.getView().setBackgroundColor(mContext.getResources().getColor(R.color.colorBlue));
@@ -170,7 +175,7 @@ public class UsersAdapter extends BaseAdapter {
                     };
                     MyRequestQueue.add(postRequest);
                 }
-                else if (button.getText().toString().equals("-")){
+                else if (button.getText().toString().equals("Cancel Friend Request")){
                     StringRequest postRequest = new StringRequest(Request.Method.POST, "http://188.166.149.168:3030/deleteOrRejectFR",
                             new Response.Listener<String>() {
                                 @Override
@@ -178,7 +183,7 @@ public class UsersAdapter extends BaseAdapter {
 
                                     holder.statusUSR.setText("You Can Add This User As A Friend.");
                                     userList.get(position).setStatus("You Can Add This User As A Friend.");
-                                    button.setText("+");
+                                    button.setText("Add as Friend");
                                     Snackbar snackbar = Snackbar
                                             .make(activity.findViewById(android.R.id.content), "You have deleted your request to " + userList.get(position).getNameSurname() + ".", Snackbar.LENGTH_LONG);
                                     snackbar.getView().setBackgroundColor(mContext.getResources().getColor(R.color.colorBlue));
