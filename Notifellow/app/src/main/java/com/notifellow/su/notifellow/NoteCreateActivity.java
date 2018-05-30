@@ -178,7 +178,7 @@ public class NoteCreateActivity extends AppCompatActivity {
         if(path == null) path = "defaultImagePath";
         if (AddData(title, note, path, email)) {
             String id = NoteCreateActivity.schema.getNoteID(title, note, path, email);
-            noteArrayList.add(new Note(id, title, note, path, email));
+            NoteFragment.noteList.add(new Note(id, title, note, path, email));
             NoteFragment.noteAdapter.notifyDataSetChanged();
             if(path.equals("defaultImagePath")) path = null;
         }

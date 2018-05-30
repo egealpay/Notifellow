@@ -40,7 +40,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         this.context = context;
     }
 
-    private void rowOnClick(Note note) {
+    private void rowOnClick(Note note, final int position) {
         noteInfoDialog = new Dialog(getContext());
         noteInfoDialog.setContentView(R.layout.note_row_clicked_v2);
         noteInfoDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); // DO NOT TOUCH, DESIGN ISSUES
@@ -86,6 +86,8 @@ public class NoteAdapter extends ArrayAdapter<Note> {
                 NoteCreateActivity.schema.updateAllButEmailAndId(Integer.parseInt(id),title, note, path);
 //                Toast.makeText(getContext(), "Note Updated. Please refresh the page to see changes.",
 //                        Toast.LENGTH_SHORT).show();
+                NoteFragment.noteList.get(position).setTitle(title);
+                NoteFragment.noteList.get(position).setNote(note);
                 notifyDataSetChanged();
                 noteInfoDialog.dismiss();
             }
@@ -177,7 +179,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rowOnClick(getItem(position));
+                rowOnClick(getItem(position), position);
             }
         });
 
