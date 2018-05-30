@@ -1,0 +1,9 @@
+diff a/Notifellow/app/src/main/java/com/notifellow/su/notifellow/Main.java b/Notifellow/app/src/main/java/com/notifellow/su/notifellow/Main.java	(rejected hunks)
+@@ -54,6 +54,7 @@
+ //import com.notifellow.su.notifellow.notes.Schema;
+ 
+ import java.io.File;
++import java.io.IOException;
+ import java.util.Calendar;
+ import java.util.HashMap;
+ import java.util.Map;

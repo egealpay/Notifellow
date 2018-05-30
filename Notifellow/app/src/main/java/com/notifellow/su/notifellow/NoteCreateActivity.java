@@ -17,6 +17,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -60,10 +61,14 @@ public class NoteCreateActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.noteTitleTxt);
         etEntry = findViewById(R.id.noteTxt);
         imageView = findViewById(R.id.NoteImage);
+        imageView.setVisibility(View.GONE);
 
         Intent receivedIntent = getIntent();
 
         email = receivedIntent.getStringExtra("email");
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("New Note");
 
         FloatingActionButton fabSet = findViewById(R.id.fabSet);
         if (fabSet != null) {
@@ -201,6 +206,7 @@ public class NoteCreateActivity extends AppCompatActivity {
         if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
             path = getRealPathFromURI_API19(this, uri);
+            imageView.setVisibility(View.VISIBLE);
             imageView.setImageURI(uri);
 
 //            Toast.makeText(this, path, Toast.LENGTH_LONG).show();
@@ -217,6 +223,7 @@ public class NoteCreateActivity extends AppCompatActivity {
                 path = fileURI.toString();
                 cursor.close();
             }
+            imageView.setVisibility(View.VISIBLE);
             imageView.setImageBitmap(thumbnail);
 
         }
@@ -324,6 +331,18 @@ public class NoteCreateActivity extends AppCompatActivity {
             return filePath;
         }
         return null;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+                this.onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
